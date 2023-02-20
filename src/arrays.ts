@@ -22,7 +22,8 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    const tripled = numbers.map((numbers: number): number => numbers * 3);
+    return tripled;
 }
 
 /**
@@ -30,7 +31,9 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    //const numbers2 = numbers.map((numbers: string): number =>
+    //(typeof numbers == "string") ? (numbers += 0): numbers;
+    return [0];
 }
 
 /**
@@ -50,7 +53,14 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    let alteredList = [...messages];
+    alteredList = messages.map((messages: string): string =>
+        messages.endsWith("!") ? messages.toUpperCase() : messages
+    );
+    alteredList = alteredList.filter(
+        (messages: string): boolean => !messages.endsWith("?")
+    );
+    return alteredList;
 };
 
 /**
@@ -58,7 +68,11 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    const shortWords = words.filter(
+        (words: string): boolean => words.length < 4
+    );
+
+    return shortWords.length;
 }
 
 /**
@@ -67,7 +81,13 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    const rgb = colors.every(
+        (colors: string): boolean => colors in ["red", "green", "blue"]
+    );
+    if (colors.length == 0) {
+        return true;
+    }
+    return rgb;
 }
 
 /**
