@@ -1,3 +1,5 @@
+import { strict } from "assert";
+
 /**
  * Consume an array of numbers, and return a new array containing
  * JUST the first and last number. If there are no elements, return
@@ -6,13 +8,14 @@
  */
 export function bookEndList(numbers: number[]): number[] {
     let numbers2: number[];
+    const len = numbers.length;
     if (numbers.length == 0) {
         numbers2 = [];
     } else if (numbers.length == 1) {
         numbers2 = [...numbers, ...numbers];
     } else {
-        numbers2 = [numbers[0], numbers[-1]];
-        //numbers2.splice(1, 0, numbers[-1]);
+        numbers2 = [numbers[0]];
+        numbers2.splice(2, 0, numbers[len - 1]);
     }
     return numbers2;
 }
@@ -31,9 +34,11 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    //const numbers2 = numbers.map((numbers: string): number =>
-    //(typeof numbers == "string") ? (numbers += 0): numbers;
-    return [0];
+    let asNums = numbers.map((numbers: string): number => Number(numbers));
+    asNums = asNums.map((asNums: number): number =>
+        Number.isNaN(asNums) ? (asNums = 0) : asNums
+    );
+    return asNums;
 }
 
 /**
@@ -44,7 +49,10 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    const removedDollar = amounts.map((amounts: string): string =>
+        amounts.startsWith("$") ? amounts.substr(1) : amounts
+    );
+    return stringsToIntegers(removedDollar);
 };
 
 /**
@@ -54,11 +62,11 @@ export const removeDollars = (amounts: string[]): number[] => {
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
     let alteredList = [...messages];
-    alteredList = messages.map((messages: string): string =>
-        messages.endsWith("!") ? messages.toUpperCase() : messages
+    alteredList = alteredList.map((alteredList: string): string =>
+        alteredList.endsWith("!") ? alteredList.toUpperCase() : alteredList
     );
     alteredList = alteredList.filter(
-        (messages: string): boolean => !messages.endsWith("?")
+        (alteredList: string): boolean => !alteredList.endsWith("?")
     );
     return alteredList;
 };
@@ -81,12 +89,12 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    const rgb = colors.every(
-        (colors: string): boolean => colors in ["red", "green", "blue"]
-    );
     if (colors.length == 0) {
         return true;
     }
+    const rgb = colors.every((colors: string): boolean =>
+        ["red", "green", "blue"].includes(colors)
+    );
     return rgb;
 }
 
@@ -98,6 +106,19 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
+    let str = "";
+    const newList = [...addends];
+    let asStr: string[] = [];
+    if (newList.length == 0) {
+        return "0=0";
+    }
+    const total = newList.reduce(
+        (count: number, num: number) => count + num,
+        0
+    );
+    asStr = newList.map((newList: number): string => newList.toString());
+    str += total.toString() + "=";
+
     return "";
 }
 
@@ -111,5 +132,23 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    const newlist = [...values];
+    //let neg1 = -1;
+    const neg1 = values.find((values: number): boolean => values < 0);
+    const negIndex = values.findIndex((values: number): boolean => values < 0);
+    if (!neg1) {
+        const total = values.reduce(
+            (runningTot: number, num: number) => runningTot + num,
+            0
+        );
+        newlist.push(total);
+    } else {
+        const clone = values.slice(0, negIndex);
+        const total = clone.reduce(
+            (runningTot: number, num: number) => runningTot + num,
+            0
+        );
+        newlist.splice(negIndex + 1, 0, total);
+    }
+    return newlist;
 }
