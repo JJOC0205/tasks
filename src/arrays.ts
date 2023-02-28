@@ -106,20 +106,27 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    let str = "";
-    const newList = [...addends];
-    let asStr: string[] = [];
-    if (newList.length == 0) {
-        return "0=0";
-    }
-    const total = newList.reduce(
-        (count: number, num: number) => count + num,
-        0
-    );
-    asStr = newList.map((newList: number): string => newList.toString());
-    str += total.toString() + "=";
+    // let str = "";
+    // const newList = [...addends];
+    // let asStr: string[] = [];
+    // if (newList.length == 0) {
+    //     return "0=0";
+    // }
+    // const total = newList.reduce(
+    //     (count: number, num: number) => count + num,
+    //     0
+    // );
+    // asStr = newList.map((newList: number): string => newList.toString());
+    // str += total.toString() + "=";
 
-    return "";
+    // return "";
+    if (addends.length == 0) {
+        return "0=0";
+    } else {
+        const total = addends.reduce((a, b) => a + b, 0);
+        const asMath = addends.map((num: number): string => num.toString());
+        return total + "=" + asMath.join("+");
+    }
 }
 
 /**
