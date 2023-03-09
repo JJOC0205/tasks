@@ -30,11 +30,12 @@ export function makeBlankQuestion(
  * HINT: Look up the `trim` and `toLowerCase` functions.
  */
 export function isCorrect(question: Question, answer: string): boolean {
+    const newQuestion = { ...question };
     answer = answer.trim();
     answer = answer.toLocaleLowerCase();
-    question.expected = question.expected.trim();
-    question.expected = question.expected.toLocaleLowerCase();
-    return answer == question.expected;
+    newQuestion.expected = question.expected.trim();
+    newQuestion.expected = question.expected.toLocaleLowerCase();
+    return answer == newQuestion.expected;
 }
 
 /**
@@ -85,7 +86,7 @@ export function toMarkdown(question: Question): string {
         newString +=
             "\n- " + question.options[0] + "\n- " + question.options[1];
     }
-    if (question.options.length === 3){
+    if (question.options.length === 3) {
         newString += "\n- " + question.options[2];
     }
     return newString;
@@ -157,5 +158,14 @@ export function mergeQuestion(
     contentQuestion: Question,
     { points }: { points: number }
 ): Question {
-    return contentQuestion;
+    return {
+        id: id,
+        name: name,
+        body: contentQuestion.body,
+        type: contentQuestion.type,
+        options: contentQuestion.options,
+        expected: contentQuestion.expected,
+        points: points,
+        published: false
+    };
 }
