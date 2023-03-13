@@ -1,5 +1,11 @@
 import React from "react";
 import "./App.css";
+import { ChangeType } from "./components/ChangeType";
+import { RevealAnswer } from "./components/RevealAnswer";
+import { StartAttempt } from "./components/StartAttempt";
+import { TwoDice } from "./components/TwoDice";
+import { CycleHoliday } from "./components/CycleHoliday";
+import { Counter } from "./components/Counter";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import dog from "./images/cuteDog.jpeg";
 
@@ -9,11 +15,19 @@ function App(): JSX.Element {
             <header className="App-header">
                 UD CISC275 with React Hooks and TypeScript by Jonathon OConnell
             </header>
+            <hr></hr>
             <h1> This is in a header</h1>
-            <p>
-                Edit <code>src/App.tsx</code> and save. This page will
-                automatically reload. Hello World
-            </p>
+            <Counter></Counter>
+            <hr />
+            <RevealAnswer></RevealAnswer>
+            <hr />
+            <StartAttempt></StartAttempt>
+            <hr />
+            <TwoDice></TwoDice>
+            <hr />
+            <ChangeType></ChangeType>
+            <hr /> Hello World
+            <CycleHoliday></CycleHoliday>
             <Button onClick={() => console.log("Hello World!")}>
                 Log Hello World
             </Button>
