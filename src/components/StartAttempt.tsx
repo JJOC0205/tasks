@@ -24,10 +24,14 @@ export function StartAttempt(): JSX.Element {
                     Start Quiz
                 </Button>
             }
-            {<Button onClick={mulligan}>Mulligan</Button>}
+            {
+                <Button disabled={progress} onClick={mulligan}>
+                    Mulligan
+                </Button>
+            }
             {
                 <Button disabled={!progress} onClick={clickEnd}>
-                    End Quiz
+                    Stop Quiz
                 </Button>
             }
             {attempts}

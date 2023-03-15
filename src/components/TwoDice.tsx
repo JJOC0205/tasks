@@ -17,13 +17,10 @@ export function TwoDice(): JSX.Element {
 
     return (
         <div>
-            <span data-testid="left-die">
-                <Button onClick={() => rollDie1(d6)}> Roll 1</Button>
-            </span>
-            <span data-testid="right-die">
-                <Button onClick={() => rollDie2(d6)}> Roll 2</Button>
-            </span>
-            {"die1 = " + roll1 + ", die2 = " + roll2}
+            <span data-testid="left-die">{roll1}</span>
+            <Button onClick={() => rollDie1(d6)}>Roll Left</Button>
+            <Button onClick={() => rollDie2(d6)}>Roll Right</Button>
+            <span data-testid="right-die">{roll2}</span>
             {roll1 != 1 && roll1 === roll2 && "You Win"}
             {roll1 === 1 && roll1 === roll2 && "You Lose"}
         </div>
