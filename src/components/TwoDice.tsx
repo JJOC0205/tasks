@@ -12,5 +12,14 @@ export function d6(): number {
 }
 
 export function TwoDice(): JSX.Element {
-    return <div>Two Dice</div>;
+    const [roll1, rollDie1] = useState<number>(1);
+    const [roll2, rollDie2] = useState<number>(6);
+
+    return (
+        <div>
+            <Button onClick={() => rollDie1(d6)}> Roll 1</Button>
+            <Button onClick={() => rollDie2(d6)}> Roll 2</Button>
+            {"die1 = " + roll1 + ", die2 = " + roll2}
+        </div>
+    );
 }
