@@ -20,24 +20,30 @@ export function ChangeColor(): JSX.Element {
     return (
         <div>
             <h3>Change Color</h3>
-            <Form.Group controlId="color Options:">
-                <Form.Check
-                    inline
-                    type="radio"
-                    name="colors"
-                    onChange={updateColor}
-                    id="color choose"
-                    value={color}
-                    label={color}
-                    //checked={color === }
+            {colorOptions.map((option: string) => (
+                <div key={option}>
+                    <span style={{ backgroundColor: option }}>{option}</span>
+                    <Form.Check
+                        inline
+                        type="radio"
+                        name={option}
+                        onChange={updateColor}
+                        id="option"
+                        value={option}
+                        label={option}
+                        checked={option === color}
+                    />
+                </div>
+            ))}
+            <p>
+                you picked{" "}
+                <span
+                    data-testid="colored-box"
+                    style={{ backgroundColor: color }}
                 >
-                    {colorOptions.map((option: string) => (
-                        <option key={option} value={option}>
-                            {option}
-                        </option>
-                    ))}
-                </Form.Check>
-            </Form.Group>
+                    {color}
+                </span>
+            </p>
         </div>
     );
 }
